@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="food_hero_section" name="Food Hero Section">
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Dive into Delights<br/>Of Delectable <span>Food</span></h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt
+        </p>
+        <div class="buttons">
+          <a href="/shop">
+        <button class="order-btn">Order Now</button>
+      </a>
+          <button class="watch-btn" t-attf-onclick="window.open('https://www.youtube.com/', '_blank')">
+            Watch Video
+            <div class="play">&#9658;</div>
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <div class="circle-bg"></div>
+        <div class="speech-bubble">Time to Feast!</div>
+        <img t-att-src="'/theme_yourhome/static/src/img/girl.png'" alt="Girl Eating" class="main" />
+        <div class="products">
+          <t t-set="latest_products" t-value="request.env['product.template'].search([('website_published', '=', True)], order='create_date desc', limit=2)"/>
+          <t t-foreach="latest_products" t-as="product">
+            <!-- Replace the existing product card section -->
+<div class="products">
+    <t t-set="latest_products" t-value="request.env['product.template'].search([('website_published', '=', True)], order='create_date desc', limit=2)"/>
+    <t t-foreach="latest_products" t-as="product">
+        <a t-att-href="'/shop/product/%s' % slug(product)" class="product-card">
+            <img t-if="product.image_1920" t-att-src="image_data_uri(product.image_1920)" t-att-alt="product.name" />
+          <div class="product-info">
+    <h4 t-field="product.name"/>
+    <div class="stars">
+        <t t-if="product.rating_count">
+            <t t-set="full_stars" t-value="int(product.rating_avg)"/>
+            <t t-set="half_star" t-value="1 if product.rating_avg - int(product.rating_avg) >= 0.5 else 0"/>
+            <t t-set="empty_stars" t-value="5 - full_stars - half_star"/>
+            <t t-foreach="range(full_stars)" t-as="i">★</t>
+            <t t-if="half_star">☆</t>
+            <t t-foreach="range(empty_stars)" t-as="i">☆</t>
+            <span class="rating-value" t-esc="('%.1f' % product.rating_avg)"/>
+        </t>
+        <t t-if="not product.rating_count">
+            <t t-foreach="range(5)" t-as="i">☆</t>
+        </t>
+    </div>
+    <div class="price">
+        <span t-field="product.list_price" t-options='{"widget": "monetary", "display_currency": request.env["website"].get_current_website()._get_current_pricelist().currency_id}'/>
+    </div>
+</div>
+        </a>
+    </t>
+</div>
+          </t>
+        </div>
+      </div>
+
+      <style type="text/css">
+        <![CDATA[
+         
+        .hero {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 40px 20px 40px;
+        gap: 10px;
+        background: #fff;
+        position: relative;
+        overflow: hidden;
+        font-family: "Inter", sans-serif;
+      }
+
+      .hero-text {
+        max-width: 50%;
+        margin-left: 80px;
+      }
+
+      .hero-text h1 {
+        font-size: 48px;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 50px;
+      }
+
+      .hero-text h1 span {
+        color: var(--primary);
+      }
+
+      .hero-text p {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 60px;
+        max-width: 425px;
+      }
+
+      .buttons {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .order-btn {
+        background-color: var(--primary);       
+        color: var(--white);  
+        padding: 14px 30px;
+        font-weight: 600;
+        font-size: 16px;
+        border: none;
+        border-radius: 40px;
+        cursor: pointer;
+      }
+
+      .watch-btn {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        font-weight: 600;
+        font-size: 17px;
+        color: #111;
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .watch-btn:hover {
+        color: var(--primary);
+        transform: scale(1.05);
+      }
+
+      .watch-btn .play {
+        width: 40px;
+        height: 40px;
+        background: #f7f7f7;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        font-size: large;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .hero-image {
+        position: relative;
+        width: 45%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .hero-image .circle-bg {
+        width: 425px;
+        height: 425px;
+        background: var(--primary);
+        border-radius: 50%;
+        position: absolute;
+        z-index: 0;
+        left: 40px;
+        margin-bottom: -75px;
+      }
+
+      .hero-image img.main {
+        position: relative;
+        z-index: 1;
+        height: 555px;
+        object-fit: contain;
+        margin-bottom: 57px;
+      }
+
+      .speech-bubble {
+        position: absolute;
+        top: 115px;
+        left: -22px;
+        background: #fff;
+        padding: 10px 20px;
+        font-weight: 700;
+        font-size: 16px;
+        color: var(--primary);
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+        white-space: nowrap;
+      }
+
+      .speech-bubble::after {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        right: 1px;
+        width: 20px;
+        height: 20px;
+        background: #fff;
+        border-radius: 0 0 6px 20px;
+        box-shadow: 2px 22px 5px rgba(0, 0, 0, 0.05);
+        transform: rotate(0deg);
+        z-index: 1;
+      }
+
+      .products {
+        position: absolute;
+        bottom: 0;
+        right: 50px;
+        left: 30px;
+        display: flex;
+        gap: 25px;
+        z-index: 2;
+      }
+
+      .product-card {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        padding: 5px 20px;
+        width: 200px;
+      }
+      .product-card:hover{
+        border: none;
+      }
+      .product-card img {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        object-fit: cover;
+        margin-right: 10px;
+      }
+
+      .product-info {
+        text-align: left;
+      }
+
+      .product-info h4 {
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      .product-info .stars {
+        color: gold;
+        font-size: 12px;
+      }
+
+      .product-info .price {
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 2px;
+        color: var(--primary);
+      }
+
+      @media (max-width: 900px) {
+        .hero {
+          flex-direction: column;
+          padding: 60px 20px;
+          text-align: center;
+        }
+
+        .hero-text,
+        .hero-image {
+          max-width: 100%;
+        }
+
+        .products {
+          position: static;
+          justify-content: center;
+          margin-top: 20px;
+        }
+
+        .hero-image .circle-bg {
+          display: none;
+        }
+      }
+      @media (max-width: 600px) {
+        .hero {
+          padding: 40px 16px;
+        }
+
+        .hero-text h1 {
+          font-size: 32px;
+          margin-bottom: 30px;
+        }
+
+        .hero-text p {
+          font-size: 16px;
+          margin-bottom: 40px;
+          max-width: 100%;
+        }
+
+        .buttons {
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .order-btn,
+        .watch-btn {
+          width: 100%;
+          justify-content: center;
+          padding: 12px;
+          font-size: 15px;
+        }
+
+        .watch-btn {
+          gap: 15px;
+        }
+
+        .watch-btn .play {
+          width: 36px;
+          height: 36px;
+          font-size: 14px;
+        }
+
+        .hero-image img.main {
+          height: 320px;
+          margin-bottom: 30px;
+        }
+
+        .speech-bubble {
+          top: 80px;
+          left: 10px;
+          font-size: 14px;
+          padding: 8px 16px;
+        }
+
+        .products {
+          flex-direction: column;
+          align-items: center;
+          gap: 16px;
+        }
+
+        .product-card {
+          width: 90%;
+        }
+
+        .product-info h4 {
+          font-size: 14px;
+        }
+
+        .product-info .stars {
+          font-size: 13px;
+        }
+
+        .product-info .price {
+          font-size: 14px;
+        }
+      }
+      @media (max-width: 400px) {
+        .hero {
+          padding: 30px 16px;
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .hero-text {
+          max-width: 100%;
+        }
+
+        .hero-text h1 {
+          font-size: 28px;
+          margin-bottom: 24px;
+        }
+
+        .hero-text p {
+          font-size: 15px;
+          margin-bottom: 30px;
+          max-width: 100%;
+        }
+
+        .buttons {
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .order-btn,
+        .watch-btn {
+          width: 50%;
+          padding: 12px;
+          font-size: 15px;
+        }
+
+        .watch-btn {
+          gap: 12px;
+        }
+
+        .watch-btn .play {
+          width: 32px;
+          height: 32px;
+          font-size: 13px;
+        }
+
+        .hero-image {
+          width: 100%;
+          margin-top: 30px;
+          position: relative;
+        }
+
+        .hero-image img.main {
+          height: 280px;
+          margin-bottom: 20px;
+        }
+
+        .hero-image .circle-bg {
+          width: 280px;
+          height: 280px;
+          background: var(--primary);
+          border-radius: 50%;
+          position: absolute;
+          z-index: 0;
+          left: 50%;
+          top: 0;
+          transform: translate(-50%, 0);
+          display: block; /* Add this */
+          opacity: 1; /* Add this */
+          margin-bottom: 0; /* Add this */
+        }
+
+        .speech-bubble {
+          top: 40px;
+          left: 12px;
+          font-size: 13px;
+          padding: 6px 14px;
+        }
+
+        .speech-bubble::after {
+          width: 14px;
+          height: 14px;
+        }
+
+        .products {
+
+          position: absolute;
+          bottom: 0;
+          right: 25px;
+          flex-direction: row;
+          gap: 10px;
+          
+        }
+
+        .product-card {
+          width: 200px;
+          padding: 5px 20px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .product-card:hover {
+         boarder: none;
+        }
+
+        .product-card img {
+          width: 50px;
+          height: 50px;
+        }
+
+        .product-info h4 {
+          font-size: 10px;
+        }
+
+        .product-info .stars {
+          font-size: 11px;
+        }
+
+        .product-info .price {
+          font-size: 13px;
+        }
+        .hero-text {
+          margin-left: 0;
+        }
+      }
+        ]]>
+      </style>
+    </section>
+  </template>
+</odoo>

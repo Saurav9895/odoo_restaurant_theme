@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE odoo [
+    <!ENTITY copy "&#169;">
+]>
+<odoo>
+    <template id="custom_footer" inherit_id="website.layout" name="Custom Footer">
+        <xpath expr="//footer" position="replace">
+            <footer>
+             <style>
+                    @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&amp;family=Roboto:ital,wght@0,100..900;1,100..900&amp;display=swap");
+      body {
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .footer {
+        /* background-color: #f9f9f9; */
+        width: 90%;
+      }
+      .top-footer {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+        padding: 20px 40px;
+      }
+      .logo-image {
+        width: 150px;
+        height: 150px;
+      }
+      .about-text {
+        font-size: 18px;
+        line-height: 1.5;
+        color: #505050;
+      }
+      .link-title {
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .nav,
+      .contact-nav {
+        display: flex;
+        flex-direction: column;
+      }
+      .link-text {
+        font-size: 18px;
+        text-decoration: none;
+        color: #505050;
+      }
+
+      .bottom-footer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        justify-content: center;
+        padding: 0 40px 20px 40px;
+      }
+      .social-icons {
+        display: flex;
+        gap: 20px;
+      }
+      .fab {
+        font-size: 22px;
+        color: #494949;
+        background-color: #f1e8e9;
+        padding: 10px;
+        border: none;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+      }
+      .fab:hover {
+        color: rgb(255, 255, 255);
+        background-color: #611d2d;
+        padding: 10px;
+        border-radius: 50%;
+      }
+      .copyright-text {
+        font-size: 18px;
+        /* font-weight: 500; */
+        color: #505050;
+      }
+      @media (max-width: 480px) {
+        .top-footer {
+          grid-template-columns: 1fr;
+          padding: 0px 10px;
+          gap: 10px;
+        }
+        .bottom-footer{
+          grid-template-columns: 1fr;
+          padding: 0px 10px;
+          margin-top: 15px;
+        }
+          .copyright-text {
+       margin-top: 20px;
+        text-align: center;
+      }
+      }
+    </style>
+                <div class="footer">
+                    <div class="top-footer">
+                        <div class="abt">
+                            <img src="/theme_yourhome/static/src/img/footer-logo.jpg" alt="Zetta Logo" class="logo-image" />
+                            <p class="about-text">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            </p>
+                        </div>
+                        <div class="useful-links">
+                            <p class="link-title">Useful Links</p>
+                            <div class="nav">
+                                <p><a href="#" class="link-text">About Us</a></p>
+                                <p><a href="#" class="link-text">My Account</a></p>
+                                <p><a href="#" class="link-text">Privacy Policy</a></p>
+                            </div>
+                        </div>
+                        <div class="main-menu">
+                            <p class="link-title">Main Menu</p>
+                            <div class="nav">
+                                <p><a href="#" class="link-text">Home</a></p>
+                                <p><a href="#" class="link-text">Offers</a></p>
+                                <p><a href="#" class="link-text">Menu</a></p>
+                            </div>
+                        </div>
+                        <div class="contact">
+                            <p class="link-title">Contact US</p>
+                            <div class="contact-nav">
+                                <p class="link-text">Email: info@zetta.com</p>
+                                <p class="link-text">Phone: (123) 456-7890</p>
+                                <p class="link-text">123 Street</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom-footer">
+                        <div class="social-icons">
+                            <a href="#"><i class="facebook fab fa-facebook-f"/></a>
+                            <a href="#"><i class="instagram fab fa-instagram"/></a>
+                            <a href="#"><i class="twitter fab fa-twitter"/></a>
+                            <a href="#"><i class="youtube fab fa-youtube"/></a>
+                        </div>
+                        <div class="copyright-content">
+                            <p class="copyright-text">
+                                &amp;copy; 2025 Zetta | All rights reserved.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </xpath>
+    </template>
+</odoo>

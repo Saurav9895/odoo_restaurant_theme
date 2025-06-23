@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="popular_categories_section" name="Popular Categories">
+        <section class="category-section">
+            <p class="subtitle">CUSTOMER FAVORITES</p>
+            <h2 class="title">Popular Categories</h2>
+            <div class="categories">
+                <!-- First 3 categories -->
+        <t t-set="categories" t-value="request.env['product.public.category'].search([], limit=3, order='create_date desc')" />
+                <t t-foreach="categories" t-as="category">
+                    <div class="category-card" t-attf-onclick="window.location.href='/shop/category/#{category.id}'">
+                        <div class="image-circle">
+                            <img t-if="category.image_1920"
+                                 t-att-src="image_data_uri(category.image_1920)"
+                                 t-att-alt="category.name"/>
+                        </div>
+                        <p class="name"><t t-esc="category.name" /></p>
+                        <p class="count">
+                            (<t t-esc="request.env['product.template'].search_count([('public_categ_ids', 'in', category.id), ('website_published', '=', True)])" /> items)
+                        </p>
+                    </div>
+                </t>
+
+                <!-- View All Card -->
+                <div class="category-card" onclick="window.location.href='/shop'">
+                    <div class="image-circle">
+                        <i class="fa fa-th-large" style="font-size: 35px; color: white;"></i>
+                    </div>
+                    <p class="name">View All</p>
+                    <p class="count">
+                        (<t t-esc="request.env['product.template'].search_count([('website_published', '=', True)])" /> Items)
+                    </p>
+                </div>
+            </div>
+
+      <style type="text/css">
+        <![CDATA[
+          .category-section {
+            font-family: 'Inter', sans-serif;
+            background-color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+          }
+         .subtitle {
+      color: var(--primary);
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .title {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 60px;
+    }
+
+    .categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .category-card {
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      padding: 20px 20px;
+      width: 220px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .image-circle {
+      background-color: #b36c7d;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 15px; /* Added padding for better spacing */
+    }
+
+    .image-circle img {
+    border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        object-fit: contain;
+        
+    }
+
+    .name {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .count {
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* Add responsive styles */
+    @media (max-width: 768px) {
+        .categories {
+            gap: 20px;
+            padding: 0 10px;
+        }
+
+        .category-card {
+            width: 50%;
+            padding: 15px;
+            margin: 0;
+        }
+
+        .image-circle {
+            padding: 12px; /* Adjusted padding for mobile */
+        }
+
+        .image-circle img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .name {
+            font-size: 16px;
+        }
+
+        .count {
+            font-size: 12px;
+        }
+    }
+
+    /* Additional mobile optimization */
+    @media (max-width: 480px) {
+        .category-section {
+            padding: 30px 0;
+        }
+
+        .title {
+            font-size: 28px;
+            margin-bottom: 40px;
+        }
+
+        .subtitle {
+            font-size: 12px;
+        }
+    }
+        ]]>
+      </style>
+    </section>
+  </template>
+</odoo>

@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="theme_yourhome.products_page" model="website.page">
+        <field name="name">Products</field>
+        <field name="type">qweb</field>
+        <field name="url">/products</field>
+        <field name="is_published">True</field>
+        <field name="key">theme_yourhome.products_page</field>
+        <field name="arch" type="xml">
+            <t name="Products" t-name="theme_yourhome.products_page">
+                <t t-call="website.layout">
+                    <div class="oe_structure"/>
+                    <div id="wrap">
+                     <section class="ecom-page">
+              <div class="ecom-container">
+                <!-- Sidebar -->
+                <aside class="ecom-sidebar">
+                  <!-- <h4>Attributes</h4> -->
+                  <t t-set="attributes" t-value="request.env['product.attribute'].search([])" />
+                  <t t-foreach="attributes" t-as="attr">
+                    <div class="ecom-filter-group">
+                      <strong><t t-esc="attr.name" /></strong>
+                      <t t-foreach="attr.value_ids" t-as="val">
+                        <label>
+                          <input type="checkbox" class="attribute-filter"
+                            t-att-data-attribute-id="attr.id"
+                            t-att-value="val.id"
+                            onchange="applyFilters()"/>
+                          <t t-esc="val.name" />
+                        </label>
+                      </t>
+                    </div>
+                  </t>
+
+                  <div class="ecom-filter-group">
+                    <strong>Price Range (Rs)</strong>
+                    <div class="price-range-fields">
+                      <div class="input-group mb-2">
+                        <span class="input-group-text">Min</span>
+                        <input type="number" class="form-control" id="min-price" placeholder="0" min="0" max="100000" value="0" onchange="applyFilters()"/>
+                      </div>
+                      <div class="input-group mb-2">
+                        <span class="input-group-text">Max</span>
+                        <input type="number" class="form-control" id="max-price" placeholder="100000" min="0" max="100000" value="100000" onchange="applyFilters()"/>
+                      </div>
+                        <button class="btn btn-primary w-100" onclick="applyFilters()">Apply</button>
+
+                    </div>
+                  </div>
+                </aside>
+ <main class="ecom-main">
+
+                  <!-- Scrollable Categories -->
+                  <div class="category-row mb-4">
+                    <t t-set="categories" t-value="request.env['product.public.category'].search([], limit=20, order='create_date desc')" />
+                    <t t-foreach="categories" t-as="cat">
+                      <a t-att-href="'/shop/category/%d' % cat.id" class="category-pill">
+                        <div class="category-icon-circle">
+                          <img t-if="cat.image_1920" t-att-src="'data:image/png;base64,%s' % cat.image_1920.decode('utf-8')" />
+                        </div>
+                        <div class="category-name"><t t-esc="cat.name" /></div>
+                      </a>
+                    </t>
+                  </div>
+                    <!-- Controls -->
+                 <div class="ecom-controls">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 w-100">
+                      <div class="input-group w-50 mb-2">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Search..." />
+                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <select class="form-select me-2" onchange="sortProducts(this.value)">
+                          <option value="featured">Sort By: Featured</option>
+                          <option value="price_asc">Price: Low to High</option>
+                          <option value="price_desc">Price: High to Low</option>
+                          <option value="newest">Newest</option>
+                        </select>
+                        <button class="btn view-toggle active grid-btn" onclick="toggleView('grid', this)">
+                          <i class="fa fa-th grid-btn"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                     <!-- Products Grid -->
+                 <div class="ecom-product-grid" id="productGrid">
+                    <t t-set="website" t-value="request.env['website'].get_current_website()"/>
+                    <t t-set="pricelist" t-value="website._get_current_pricelist()"/>
+                    <t t-set="products" t-value="request.env['product.template'].search([('website_published','=',True)], order='create_date desc')" />
+                    <t t-foreach="products" t-as="product">
+                        <t t-set="product_name_lower" t-value="product.name.lower()" />
+                        <t t-set="product_attributes" t-value="','.join(str(x.id) for x in product.attribute_line_ids.mapped('value_ids'))" />
+                        
+                        <a t-att-href="'/shop/product/%s' % product.id"
+                        class="ecom-product-card"
+                        t-att-data-name="product_name_lower"
+                        t-att-data-price="str(product.list_price)"
+                        t-att-data-product-id="product.id"
+                        t-att-data-attributes="product_attributes">
+                        <div class="ecom-product-img-wrap">
+                            <img t-if="product.image_1920" t-att-src="'data:image/png;base64,%s' % product.image_1920.decode('utf-8')" t-att-alt="product.name" class="ecom-product-img"/>
+                        </div>
+                        <div class="ecom-product-info">
+                            <h4 t-field="product.name"/>
+                            <div class="ecom-price-rating">
+                            <span class="ecom-price" t-field="product.list_price" t-options='{"widget": "monetary", "display_currency": pricelist.currency_id}'/>
+                            <span class="ecom-rating">⭐ <t t-esc="round(product.rating_avg, 1) if product.rating_avg else '0.0'"/></span>
+                            </div>
+                        </div>
+                        </a>
+                    </t>
+                    </div>
+
+                <!-- Pagination -->
+                  <div class="pagination-container text-center mt-4">
+                    <button class="pagination-btn" id="prevPage" onclick="changePage(-1)">
+                      <i class="fa fa-arrow-left"></i>
+                    </button>
+                    <span id="pageIndicator">Page 1</span>
+                    <button class="pagination-btn" id="nextPage" onclick="changePage(1)">
+                      <i class="fa fa-arrow-right"></i>
+                    </button>
+                  </div>
+                </main>
+              </div>
+                   
+                      <style>
+                .ecom-page {
+                  font-family: 'Inter', sans-serif;
+                  padding: 40px;
+                  overflow-x: hidden;
+                }
+                .ecom-container {
+                  display: flex;
+                  gap: 20px;
+                  max-width: 1200px;
+                  margin: auto;
+                  overflow-x: hidden;
+                }
+                .ecom-sidebar {
+                  width: 250px;
+                  background: #fff;
+                  padding: 20px;
+                  border-right: 1px solid #eee;
+                }
+                .ecom-filter-group {
+                  margin-bottom: 20px;
+                }
+                .ecom-filter-group label {
+                  display: block;
+                  margin: 5px 0;
+                }
+                .ecom-main {
+                  flex: 1;
+                  overflow-x: hidden;
+                }
+
+                .category-row {
+                  display: flex;
+                  overflow-x: auto;
+                  scroll-snap-type: x mandatory;
+                  gap: 1rem;
+                  padding-bottom: 1rem;
+                  scrollbar-width: none;
+                  -ms-overflow-style: none;
+                }
+                .category-row::-webkit-scrollbar {
+                  display: none;
+                }
+                .category-pill {
+                  scroll-snap-align: start;
+                  flex: 0 0 calc(25% - 0.75rem); /* 4 visible per scroll */
+                  display: flex;
+                  align-items: center;
+                  background: #fff;
+                  border-radius: 2rem;
+                  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                  padding: 0.5rem 1.2rem;
+                  text-decoration: none;
+                  transition: transform 0.2s ease;
+                }
+                .category-pill:hover {
+                  transform: translateY(-3px);
+                }
+                .category-icon-circle {
+                  width: 50px;
+                  height: 50px;
+                  border-radius: 50%;
+                  background: #9b5a6d;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin-right: 0.75rem;
+                }
+                .category-icon-circle img {
+                  width: 35px;
+                  height: 35px;
+                  border-radius: 50%;
+                  object-fit: contain;
+                }
+                .category-name {
+                  font-weight: 600;
+                  color: #000;
+                }
+
+                .ecom-controls {
+                  display: flex;
+                  gap: 10px;
+                  margin-bottom: 20px;
+                }
+
+                .ecom-product-grid {
+                  display: grid;
+                  grid-template-columns: repeat(4, 1fr);
+                  gap: 20px;
+                }
+
+                .ecom-product-card {
+                  background: #fff;
+                  border-radius: 10px;
+                  padding: 15px;
+                  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                  text-decoration: none;
+                  color: inherit;
+                  transition: all 0.3s;
+                }
+
+                .ecom-product-card:hover {
+                  transform: translateY(-5px);
+                  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                }
+
+                .ecom-product-img-wrap {
+                  text-align: center;
+                  margin-bottom: 15px;
+                }
+
+                .ecom-product-img {
+                  height: 150px;
+                  object-fit: contain;
+                }
+
+                .ecom-product-info h4 {
+                  margin: 0 0 10px;
+                  font-size: 16px;
+                }
+
+                .ecom-price-rating {
+                  display: flex;
+                  justify-content: space-between;
+                  font-size: 14px;
+                  font-weight: 600;
+                }
+
+                .ecom-price-rating span {
+                  color: #000;
+                }
+
+                .pagination-container {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 12px;
+                    padding-top: 50px;
+                    }
+
+                    .pagination-btn {
+                    background-color: var(--primary);
+                    border: none;
+                    color: #fff;
+                    padding: 10px 15px;
+                    border-radius: 50%;
+                    font-size: 16px;
+                    cursor: pointer;
+                    transition: background 0.3s;
+                    }
+
+                    .pagination-btn:disabled {
+                    background-color: #ccc;
+                    cursor: not-allowed;
+                    }
+
+                    #pageIndicator {
+                    font-weight: bold;
+                    }
+
+                    .price-range-fields {
+                      display: flex;
+                      flex-direction: column;
+                      gap: 10px;
+                    }
+
+                    .grid-btn{
+                        padding: 15px;
+                        border: none;
+                        background-color:var(--primary);
+                        color: #fff;
+                        border-radius: 50%;
+                    }
+
+                /* Responsive behavior */
+                @media (max-width: 992px) {
+                  .ecom-product-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                  }
+                  .category-pill {
+                    flex: 0 0 calc(50% - 0.75rem);
+                  }
+                }
+
+                @media (max-width: 576px) {
+                  .ecom-product-grid {
+                    grid-template-columns: repeat(1, 1fr);
+                  }
+                  .category-pill {
+                    flex: 0 0 100%;
+                  }
+                }
+              </style>
+   <script type="text/javascript">
+<![CDATA[
+  let currentPage = 1;
+  const itemsPerPage = 16;
+  let allProducts = [];
+
+  document.addEventListener('DOMContentLoaded', () => {
+    allProducts = Array.from(document.querySelectorAll('.ecom-product-card'));
+    filterAndDisplayProducts();
+
+    // Search input
+    document.getElementById('searchInput').addEventListener('input', filterAndDisplayProducts);
+  });
+
+  function getSelectedAttributes() {
+    const selected = {};
+    document.querySelectorAll('.attribute-filter:checked').forEach(input => {
+      const attrId = input.dataset.attributeId;
+      const valId = input.value;
+      if (!selected[attrId]) selected[attrId] = [];
+      selected[attrId].push(valId);
+    });
+    return selected;
+  }
+
+  function filterAndDisplayProducts() {
+    const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+    const selectedAttributes = getSelectedAttributes();
+    const minPrice = parseFloat(document.getElementById('min-price').value || 0);
+    const maxPrice = parseFloat(document.getElementById('max-price').value || 100000);
+    const sortBy = document.querySelector('select').value;
+
+    let filtered = allProducts.filter(card => {
+      const name = card.dataset.name;
+      const price = parseFloat(card.dataset.price);
+      const productAttr = card.dataset.attributes.split(',');
+
+      // Search
+      if (!name.includes(searchQuery)) return false;
+
+      // Price filter
+      if (price < minPrice || price > maxPrice) return false;
+
+      // Attribute filter
+      for (const attr in selectedAttributes) {
+        if (!selectedAttributes[attr].some(val => productAttr.includes(val))) {
+          return false;
+        }
+      }
+
+      return true;
+    });
+
+    // Sorting
+    filtered.sort((a, b) => {
+      const priceA = parseFloat(a.dataset.price);
+      const priceB = parseFloat(b.dataset.price);
+      const dateA = parseInt(a.dataset.productId); // Assuming ID indicates recency
+      const dateB = parseInt(b.dataset.productId);
+
+      switch (sortBy) {
+        case 'price_asc': return priceA - priceB;
+        case 'price_desc': return priceB - priceA;
+        case 'newest': return dateB - dateA;
+        case 'featured': return 0; // original order (do nothing)
+        default: return 0;
+      }
+    });
+
+    // Pagination
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginated = filtered.slice(startIndex, startIndex + itemsPerPage);
+
+    // Update product grid
+    const grid = document.getElementById('productGrid');
+    grid.innerHTML = '';
+    paginated.forEach(el => grid.appendChild(el));
+
+    // Update page indicator
+    const pageIndicator = document.getElementById('pageIndicator');
+    const totalPages = Math.ceil(filtered.length / itemsPerPage);
+    pageIndicator.textContent = `Page ${currentPage} of ${Math.max(totalPages, 1)}`;
+
+    // Disable buttons when necessary
+    document.getElementById('prevPage').disabled = currentPage <= 1;
+    document.getElementById('nextPage').disabled = currentPage >= totalPages;
+  }
+
+  function sortProducts(value) {
+    currentPage = 1;
+    filterAndDisplayProducts();
+  }
+
+  function changePage(delta) {
+    currentPage += delta;
+    filterAndDisplayProducts();
+  }
+
+  function toggleView(viewType, btn) {
+    document.querySelectorAll('.view-toggle').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const grid = document.getElementById('productGrid');
+    grid.classList.toggle('list-view', viewType === 'list');
+  }
+
+  function applyFilters() {
+    currentPage = 1;
+    filterAndDisplayProducts();
+  }
+
+]]>
+</script>
+                </section>
+                </div> 
+                </t>
+            </t>
+        </field>
+    </record>
+</odoo>

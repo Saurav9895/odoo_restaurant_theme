@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="benefits" name="Benefits">
+        <section class="benefits o_cc5">
+
+            <div class="main-cont"
+      style="display: flex; align-items: center; flex-direction: column"
+    >
+      <div class="main" style="display: flex; gap: 40px">
+        <div class="first">
+          <div
+            style="
+              /* background-color: #fdf2e9; */
+              border: 2px solid #fdf2e9;
+              padding: 15px 40px;
+              position: relative;
+              overflow: hidden;
+              border-radius: 12px;
+              font-family: sans-serif;
+            "
+          >
+            <!-- Plan Header -->
+            <header style="margin-bottom: 10px">
+              <p
+                style="
+                  font-size: 16px;
+                  font-weight: 700;
+                  color: #e67e22;
+                  letter-spacing: 1px;
+                  margin-top: 35px;
+                  text-transform: uppercase;
+                  text-align: center;
+                "
+              >
+                Complete
+              </p>
+              <p
+                style="
+                  font-size: 50px;
+                  font-weight: 600;
+                  color: #333;
+                  margin-bottom: 16px;
+                  text-align: center;
+                "
+              >
+                <span
+                  style="
+                    font-size: 24px;
+                    font-weight: 500;
+                    margin-right: 0.8rem;
+                    vertical-align: super;
+                  "
+                  >$</span
+                >649
+              </p>
+              <p style="font-size: 18px; line-height: 1.6; color: #6f6f6f">
+                per month. That's just $11 per meal!
+              </p>
+            </header>
+            <!-- Features List -->
+            <ul style="list-style: none; padding: 0; margin: 0">
+              <li
+                style="
+                  display: flex;
+                  align-items: center;
+                  margin-bottom: 5px;
+                  font-size: 18px;
+                  color: #333;
+                "
+              >
+                <span
+                  style="color: #e67e22; font-size: 2rem; margin-right: 1rem"
+                  >&#10003;</span
+                >
+                <span><strong>2 meals</strong> per day</span>
+              </li>
+              <li
+                style="
+                  display: flex;
+                  align-items: center;
+                  margin-bottom: 5px;
+                  font-size: 18px;
+                  color: #333;
+                "
+              >
+                <span
+                  style="color: #e67e22; font-size: 2rem; margin-right: 1rem"
+                  >&#10003;</span
+                >
+                <span>Order <strong>24/7</strong></span>
+              </li>
+              <li
+                style="
+                  display: flex;
+                  align-items: center;
+                  margin-bottom: 5px;
+                  font-size: 18px;
+                  color: #333;
+                "
+              >
+                <span
+                  style="color: #e67e22; font-size: 2rem; margin-right: 1rem"
+                  >&#10003;</span
+                >
+                <span>Delivery is free</span>
+              </li>
+              <li
+                style="
+                  display: flex;
+                  align-items: center;
+                  margin-bottom: 10px;
+                  font-size: 18px;
+                  color: #333;
+                "
+              >
+                <span
+                  style="color: #e67e22; font-size: 2rem; margin-right: 1rem"
+                  >&#10003;</span
+                >
+                <span>Get access to latest recipes</span>
+              </li>
+            </ul>
+            <!-- Sign Up Button -->
+            <div
+              style="text-align: center; margin-top: 15px; margin-bottom: 35px"
+            >
+              <a
+                href="#"
+                style="
+                  display: inline-block;
+                  background-color: #e67e22;
+                  color: #fff;
+                  font-size: 18px;
+                  font-weight: 600;
+                  padding: 15px 25px;
+                  border-radius: 9px;
+                  text-decoration: none;
+                  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+                  transition: background 0.2s;
+                "
+              >
+                Start eating well
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="first">
+          <div
+            style="
+              background-color: #fdf2e9;
+              border: 2px solid #fdf2e9;
+              padding: 15px 40px;
+              position: relative;
+              overflow: hidden;
+              border-radius: 12px;
+              font-family: sans-serif;
+            "
+          >
+            <!-- Best Value Ribbon -->
+            <div
+              style="
+                content: '';
+                position: absolute;
+                top: 6.4%;
+                right: -22%;
+                text-transform: uppercase;
+                font-size: 16px;
+                color: #333;
+                font-weight: 500;
+                background-color: #ffd43b;
+                padding: 10px 80px;
+                transform: rotate(45deg);
+                pointer-events: none;
+                z-index: 2;
+              "
+            >
+              Best Value
+            </div>
+            <!-- Plan Header -->
+            <header style="margin-bottom: 10px">
+              <p
+                style="
+                  font-size: 16px;
+                  font-weight: 700;
+                  color: #e67e22;
+                  letter-spacing: 1px;
+                  margin-top: 35px;
+                  text-transform: uppercase;
+                  text-align: center;
+                "
+              >
+                Complete
+              </p>
+              <p
+                style="
+                  font-size: 50px;
+                  font-weight: 600;
+                  color: #333;
+                  margin-bottom: 16px;
+                  text-align: center;
+                "
+              >
+                <span
+                  style="
+                    font-size: 24px;
+                    font-weight: 500;
+                    margin-right: 0.8rem;
+                    vertical-align: super;
+                  "
+                  >$</span
+                >649
+              </p>
+              <p style="font-size: 18px; line-height: 1.6; color: #6f6f6f">
+                per month. That's just $11 per meal!
+              </p>
+            </header>
+            <!-- Features List -->
+            <ul style="list-style: none; padding: 0; margin: 0">
+              <li
+                style="
+                  display: flex;
+                  align-items: center;
+                  margin-bottom: 5px;
+                  font-size: 18px;
+                  color: #333;
+                "
+              >
+                <span
+                  style="color: #e67e22; font-size: 2rem; margin-right: 1rem"
+                  >&#10003;</span
+                >
+                <span><strong>2 meals</strong> per day</span>
+              </li>
+              <li
+                style="
+                  display: flex;
+                  align-items: center;
+                  margin-bottom: 5px;
+                  font-size: 18px;
+                  color: #333;
+                "
+              >
+                <span
+                  style="color: #e67e22; font-size: 2rem; margin-right: 1rem"
+                  >&#10003;</span
+                >
+                <span>Order <strong>24/7</strong></span>
+              </li>
+              <li
+                style="
+                  display: flex;
+                  align-items: center;
+                  margin-bottom: 5px;
+                  font-size: 18px;
+                  color: #333;
+                "
+              >
+                <span
+                  style="color: #e67e22; font-size: 2rem; margin-right: 1rem"
+                  >&#10003;</span
+                >
+                <span>Delivery is free</span>
+              </li>
+              <li
+                style="
+                  display: flex;
+                  align-items: center;
+                  margin-bottom: 10px;
+                  font-size: 18px;
+                  color: #333;
+                "
+              >
+                <span
+                  style="color: #e67e22; font-size: 2rem; margin-right: 1rem"
+                  >&#10003;</span
+                >
+                <span>Get access to latest recipes</span>
+              </li>
+            </ul>
+            <!-- Sign Up Button -->
+            <div
+              style="text-align: center; margin-top: 15px; margin-bottom: 35px"
+            >
+              <a
+                href="#"
+                style="
+                  display: inline-block;
+                  background-color: #e67e22;
+                  color: #fff;
+                  font-size: 18px;
+                  font-weight: 600;
+                  padding: 15px 25px;
+                  border-radius: 9px;
+                  text-decoration: none;
+                  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+                  transition: background 0.2s;
+                "
+              >
+                Start eating well
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+            </div>
+        </section>
+    </template>
+</odoo>

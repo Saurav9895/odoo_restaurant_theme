@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="story_section" name="Story Section">
+    <section class="section">
+      <div class="content">
+        <p class="tagline">Our Story &amp; Heritage</p>
+        <h2 class="story-title">Our Culinary Journey<br />And Services</h2>
+
+        <div class="story-content">
+          <p class="description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+        <a href="/shop" class="btn">ORDER NOW</a>
+      </div>
+
+      <div class="services">
+        <div class="service-box">
+          <i class="fas fa-utensils"></i>
+          <p class="service-title">Variety</p>
+          <p class="service-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+        </div>
+        <div class="service-box">
+          <i class="fas fa-truck"></i>
+          <p class="service-title">Fast Delivery</p>
+          <p class="service-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+        </div>
+        <div class="service-box">
+          <i class="fas fa-shopping-cart"></i>
+          <p class="service-title">Online Ordering</p>
+          <p class="service-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+        </div>
+        <div class="service-box">
+          <i class="fas fa-gift"></i>
+          <p class="service-title">Offers</p>
+          <p class="service-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+        </div>
+      </div>
+
+      <style type="text/css">
+        <![CDATA[
+          .section {
+            display: flex;
+            justify-content: space-between;
+            padding: 40px 40px;
+            align-items: center;
+            
+          }
+
+          .content {
+            max-width: 500px;
+            margin-left: 80px;
+          }
+
+          .content h2 {
+            font-size: 40px;
+            margin: 20px 0 20px;
+          }
+
+          .description {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.6;
+          }
+
+          .content .btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 14px 28px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+          }
+
+          .services {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-right: 80px;
+          }
+
+          .service-box {
+            background: #fff;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.19);
+            width: 210px;
+            margin: 0 auto;
+          }
+
+          .service-box i {
+            font-size: 38px;
+            color:  var(--primary);
+            margin-bottom: 10px;
+          }
+
+          .service-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 10px 0;
+            text-align: center;
+            text-transform: uppercase;
+          }
+
+          .service-description {
+            color: #444;
+            font-size: 16px;
+          }
+
+          .tagline {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+          }
+          .story-title{
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+          }
+
+          @media (max-width: 400px) {
+            .section {
+              flex-direction: column;
+              text-align: center;
+              padding: 40px 20px;
+            }
+
+            .content {
+              margin-left: 0;
+            }
+
+            .services {
+              display: grid;
+              grid-template-columns: 1fr;
+              gap: 20px;
+              margin-right: 0;
+              margin-top: 20px;
+            }
+
+            .service-box {
+              width: 100%;
+            }
+          }
+        ]]>
+      </style>
+    </section>
+  </template>
+</odoo>

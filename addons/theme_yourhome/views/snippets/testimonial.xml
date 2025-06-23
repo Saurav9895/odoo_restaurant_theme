@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="website_testimonials" name="Testimonials Section">
+    <section class="testimonial-section">
+      <style>
+        .testimonial-section {
+          text-align: center;
+          padding: 80px 20px;
+          background: #fdfdfd;
+          font-family: 'Inter', sans-serif;
+        }
+
+        .testimonial-section .subtitle {
+          color: var(--primary);
+          font-weight: 600;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          
+        }
+
+        .testimonial-section h2 {
+          font-size: 40px;
+          font-weight: 700;
+          margin-bottom: 100px;
+          color: #000;
+        }
+
+        .testimonial-cards {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 40px;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        .testimonial-card {
+          position: relative;
+          background: #fff;
+          padding: 150px 20px 40px;
+          width: calc(50% - 20px);
+          max-width: 460px;
+          text-align: center;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+          border-radius: 80px 35px 60px 35px / 60px 35px 80px 35px;
+          display: none;
+        }
+
+        .testimonial-card img {
+          width: 90px;
+          height: 90px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 5px solid #fff;
+          position: absolute;
+          top: -45px;
+          left: 50%;
+          transform: translateX(-50%);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-card p {
+          font-size: 14px;
+          color: #5f6c7b;
+          line-height: 1.7;
+          margin-bottom: 30px;
+          margin-top: -50px;
+          margin-left: 20px;
+          margin-right: 20px;
+        }
+
+        .testimonial-card .name {
+          font-weight: 700;
+          color: #0d0d0d;
+          font-size: 16px;
+        }
+
+        .dots {
+          margin-top: 40px;
+        }
+
+        .dot {
+          height: 6px;
+          width: 6px;
+          margin: 0 6px;
+          background-color: #c4c4c4;
+          border-radius: 50%;
+          display: inline-block;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        .dot.active {
+          background-color: var(--primary);
+        }
+        .subtitle{
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .test-title{
+          font-size: 42px;
+                    font-weight: 700;
+                    margin-bottom: 60px;
+                    text-align: center;
+        }
+
+        /* Add responsive styles */
+        @media (max-width: 768px) {
+          .testimonial-card {
+            width: 100%;
+          }
+        }
+      </style>
+
+      <div class="subtitle tagline">Testimonials</div>
+      <h2 class="test-title">What Our Customers Say About Us</h2>
+
+      <div class="testimonial-cards">
+        <t t-foreach=" [
+          {'image': 'https://randomuser.me/api/portraits/women/44.jpg', 'name': 'Ama Ampomah'},
+          {'image': 'https://randomuser.me/api/portraits/men/32.jpg', 'name': 'Kweku Annan'},
+          {'image': 'https://randomuser.me/api/portraits/women/65.jpg', 'name': 'Akosua Mensah'},
+          {'image': 'https://randomuser.me/api/portraits/men/76.jpg', 'name': 'Yaw Boateng'},
+          {'image': 'https://randomuser.me/api/portraits/women/25.jpg', 'name': 'Nana Adwoa'},
+          {'image': 'https://randomuser.me/api/portraits/men/88.jpg', 'name': 'Kojo Badu'}
+        ]" t-as="testimonial">
+          <div t-attf-class="testimonial-card testimonial-card-#{testimonial_index}">
+            <img t-att-src="testimonial['image']" t-att-alt="testimonial['name']"/>
+            <p>
+              Lorem ipsum dolor sit amet consectetur. Tortor massa nisl quam sit. Vitae congue ultrices neque penatibus mi in quisque. Leo in cursus enim magnis ante. Proin iaculis platea ipsum sagittis ac eu aliquam quis. Ornare tincidunt tempus semper
+            </p>
+            <div class="name" t-esc="testimonial['name']"></div>
+          </div>
+        </t>
+      </div>
+
+   
+<!-- Update the dots section -->
+<div class="dots">
+    <t t-foreach="range(3)" t-as="dot">
+        <span t-attf-class="dot #{'active' if dot == 0 else ''}" 
+              t-att-data-index="dot" />
+    </t>
+</div>
+
+      <script type="text/javascript">
+        <![CDATA[
+    (function() {
+        function initTestimonials() {
+            function setActiveDot(index) {
+                const cards = document.querySelectorAll('.testimonial-card');
+                const dots = document.querySelectorAll('.dot');
+                const cardsPerPage = 2;
+
+                // Show two cards at a time
+                cards.forEach((card, i) => {
+                    const startIdx = index * cardsPerPage;
+                    const endIdx = startIdx + cardsPerPage;
+                    card.style.display = (i >= startIdx && i < endIdx) ? 'block' : 'none';
+                });
+
+                // Update active dot
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+            }
+
+            // Add click handlers to dots
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    setActiveDot(index);
+                    if (window.testimonialInterval) {
+                        clearInterval(window.testimonialInterval);
+                    }
+                });
+            });
+
+            // Initialize first pair of slides
+            setActiveDot(0);
+
+            // Auto-rotate every 5 seconds
+            let currentIndex = 0;
+            const totalSlides = Math.ceil(document.querySelectorAll('.testimonial-card').length / 2);
+
+            function rotateTestimonials() {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                setActiveDot(currentIndex);
+            }
+
+            window.testimonialInterval = setInterval(rotateTestimonials, 4000);
+        }
+
+        // Initialize on DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initTestimonials);
+        } else {
+            initTestimonials();
+        }
+    })();
+]]>
+</script>
+    </section>
+  </template>
+</odoo>

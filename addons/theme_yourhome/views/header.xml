@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="custom_header" inherit_id="website.layout" name="Custom Header">
+        <xpath expr="//header" position="replace">
+            <header>
+                <style>
+                 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&amp;family=Roboto:ital,wght@0,100..900;1,100..900&amp;display=swap");
+      body {
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+                    .custom-header {
+                        padding: 15px 0;
+                        <!-- background-color: #F9F9FA;
+                        border-bottom: 1px solid #F9F9FA; -->
+                    }
+                    .custom-header .nav-link {
+                        font-weight: 600;
+                        color: #000 !important;
+                        margin: 0 12px;
+                        font-size: 16px;
+                    }
+                    .custom-header .nav-link.active {
+                        color: var(--primary) !important;
+                    }
+                    .custom-header .search-icon, .custom-header .cart-icon {
+                        font-size: 18px;
+                        color: #000;
+                        margin-right: 20px;
+                        position: relative;
+                    }
+                    .custom-header .cart-icon .badge {
+                        position: absolute;
+                        top: -8px;
+                        right: -12px;
+                        background: var(--primary);
+                        color: white;
+                        font-size: 10px;
+                        padding: 3px 6px;
+                        border-radius: 50%;
+                    }
+                    .cart-icon:hover{
+                        text-decoration: none;
+                    }
+                    .custom-header .account-btn {
+                        background-color: var(--primary);
+                        color: white;
+                        border-radius: 30px;
+                        padding: 12px 20px;
+                        font-weight: 600;
+                        text-decoration: none;
+                        transition: background 0.3s ease;
+                    }
+                    .custom-header .account-btn:hover {
+                        background-color: var(--primary);
+                        color: white;
+                    }
+                    .mobile-menu-toggle {
+                        display: none;
+                        background: none;
+                        border: none;
+                        font-size: 24px;
+                        color: #000;
+                        cursor: pointer;
+                    }
+                    .nav-menu {
+                        display: flex;
+                        align-items: center;
+                    }
+                    .search-container {
+                        position: relative;
+                        display: inline-block;
+                    }
+                    .search-input-wrapper {
+                        display: none;
+                        position: absolute;
+                        top: 45px;
+                        right: -10px;
+                        width: 300px;
+                        padding-top: 10px;
+                        z-index: 1001;
+                    }
+                    .search-input-wrapper.show {
+                        display: block;
+                    }
+                    .search-input {
+                        width: 100%;
+                        padding: 10px 15px;
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        font-size: 14px;
+                        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                    }
+                    .search-results {
+                        display: none;
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        right: 0;
+                        background: white;
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        max-height: 400px;
+                        overflow-y: auto;
+                        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                    }
+                    .search-result-item {
+                        display: flex;
+                        align-items: center;
+                        padding: 12px;
+                        border-bottom: 1px solid #eee;
+                        text-decoration: none;
+                        color: inherit;
+                    }
+                    .search-result-item:hover {
+                        background: #f5f5f5;
+                    }
+                    .search-result-image {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        margin-right: 12px;
+                    }
+                    .search-result-content {
+                        flex: 1;
+                    }
+                    .search-result-name {
+                        font-weight: 600;
+                        margin-bottom: 4px;
+                        color: #333;
+                    }
+                    .search-result-price {
+                        color: var(--primary);
+                        font-weight: 600;
+                    }
+                    .search-footer {
+                        border-top: 1px solid #eee;
+                    }
+                    .search-footer .btn-link {
+                        color: var(--primary);
+                        text-decoration: none;
+                    }
+                    .search-footer .btn-link:hover {
+                        text-decoration: underline;
+                    }
+
+                    @media (max-width: 991px) {
+                        .mobile-menu-toggle {
+                            display: block;
+                        }
+                        .nav-menu {
+                            display: none;
+                            position: fixed;
+                            top: 80px;
+                            left: 0;
+                            right: 0;
+                            background: #F9F9FA;
+                            padding: 20px;
+                            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                            z-index: 1000;
+                        }
+                        .nav-menu.show {
+                            display: block;
+                        }
+                        .custom-header ul {
+                            flex-direction: column;
+                            gap: 15px;
+                        }
+                        .custom-header .nav-link {
+                            margin: 0;
+                            padding: 10px 0;
+                            display: block;
+                        }
+                        .dropdown-menu {
+                            position: static !important;
+                            background: transparent;
+                            border: none;
+                            box-shadow: none;
+                            padding: 0;
+                            margin-top: 10px;   
+                        }
+                        .dropdown-item {
+                            padding: 8px 15px;
+                        }
+                        .icons-buttons {
+                            display: flex;
+                            align-items: center;
+                            gap: 15px;
+                        }
+                        .account-btn {
+                            padding: 6px 15px;
+                            font-size: 14px;
+                        }
+                        .search-input-wrapper {
+                            position: fixed;
+                            top: 80px;
+                            left: 20px;
+                            right: 20px;
+                            width: auto;
+                        }
+                    }
+                    @media (max-width: 400px) {
+                        .account-btn{
+                            font-size: 10px;
+                            
+                        }
+                         .icons-buttons {                   
+                            gap: 2px;
+                        }
+
+                    }
+
+                </style>
+
+                <nav class="custom-header">
+                    <div class="container d-flex justify-content-between align-items-center">
+                        <!-- Mobile Menu Toggle -->
+                        <button class="mobile-menu-toggle">
+                            <i class="fa fa-bars"></i>
+                        </button>
+
+                        <!-- Logo -->
+                        <div>
+                            <a href="/" class="navbar-brand">
+                                <img src="/theme_yourhome/static/src/img/logo.jpeg" alt="Logo" style="height:50px; width:auto;"/>
+                            </a>
+                        </div>
+
+                        <!-- Navigation Menu -->
+                        <div class="nav-menu">
+                            <ul class="d-flex list-unstyled m-0 align-items-center">
+                                <li><a href="/" class="nav-link active">Home</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Menu</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="/products">Menu 1</a></li>
+                                        <li><a class="dropdown-item" href="/shop">Menu 2</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/who-we-are" class="nav-link">Who We Are</a></li>
+                                <li><a href="orders" class="nav-link">Orders</a></li>
+                                <li><a href="/contactus" class="nav-link">Contact</a></li>
+                               
+                            </ul>
+                        </div>
+
+                        <!-- Right Side Icons & Button -->
+                        <div class="icons-buttons">
+                            <div class="search-container">
+                                <div class="search-icon" style="cursor: pointer;">
+                                    <i class="fa fa-search"></i>
+                                </div>
+                                <div class="search-input-wrapper">
+                                    <input type="text" class="search-input" placeholder="Search products..."/>
+                                    <div class="search-results">
+                                        <t t-set="products" t-value="request.env['product.template'].search([
+                                            ('website_published', '=', True),
+                                            '|',
+                                            ('name', 'ilike', ''),
+                                            ('description_sale', 'ilike', '')
+                                        ], limit=20, order='name asc')"/>
+                                        <t t-foreach="products" t-as="product">
+                                            <a t-att-href="'/shop/product/%s' % product.id" class="search-result-item">
+                                                <t t-if="product.image_1920">
+                                                    <img t-att-src="image_data_uri(product.image_1920)" 
+                                                         t-att-alt="product.name" 
+                                                         class="search-result-image"/>
+                                                </t>
+                                                <div class="search-result-content">
+                                                    <div class="search-result-name" t-field="product.name"/>
+                                                    <div class="search-result-price" t-field="product.list_price" 
+                                                         t-options='{"widget": "monetary", "display_currency": request.env["website"].get_current_website()._get_current_pricelist().currency_id}'/>
+                                                </div>
+                                            </a>
+                                        </t>
+                                        <div class="search-footer text-center py-2" t-if="products">
+                                            <a href="/shop" class="btn btn-link">View All Products</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           <a href="/shop/cart" class="cart-icon position-relative">
+                            <i class="fa fa-shopping-bag"></i>
+                            <t t-set="cart" t-value="request.website.sale_get_order()"/>
+                            <span id="cart-products-count" class="badge" t-esc="int(sum(cart.order_line.mapped('product_uom_qty'))) if cart else 0"/>
+                        </a>
+                            <a href="/my" class="account-btn ms-2">My Account</a>
+                        </div>
+                    </div>
+                </nav>
+
+                <script type="text/javascript">
+                <![CDATA[
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+                        const navMenu = document.querySelector('.nav-menu');
+                        
+                        mobileMenuToggle.addEventListener('click', function() {
+                            navMenu.classList.toggle('show');
+                        });
+                        
+                        // Close menu when clicking outside
+                        document.addEventListener('click', function(event) {
+                            if (!event.target.closest('.nav-menu') && 
+                                !event.target.closest('.mobile-menu-toggle')) {
+                                navMenu.classList.remove('show');
+                            }
+                        });
+
+                        // Active link
+                        const links = document.querySelectorAll('.custom-header .nav-link');
+                        links.forEach(link => {
+                            if (link.href === window.location.href) {
+                                link.classList.add('active');
+                            }
+                        });
+
+                        const searchIcon = document.querySelector('.search-icon');
+                        const searchInputWrapper = document.querySelector('.search-input-wrapper');
+                        const searchInput = document.querySelector('.search-input');
+                        const searchResults = document.querySelector('.search-results');
+
+                        searchIcon.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            searchInputWrapper.classList.toggle('show');
+                            if (searchInputWrapper.classList.contains('show')) {
+                                searchInput.focus();
+                            }
+                        });
+
+                        searchInput.addEventListener('input', function() {
+                            const query = this.value.trim().toLowerCase();
+                            const items = searchResults.querySelectorAll('.search-result-item');
+                            
+                            if (query.length > 0) {
+                                items.forEach(item => {
+                                    const name = item.querySelector('.search-result-name').textContent.toLowerCase();
+                                    item.style.display = name.includes(query) ? 'flex' : 'none';
+                                });
+                                searchResults.style.display = 'block';
+                            } else {
+                                searchResults.style.display = 'none';
+                            }
+                        });
+
+                        document.addEventListener('click', function(event) {
+                            if (!event.target.closest('.search-container')) {
+                                searchInputWrapper.classList.remove('show');
+                                searchResults.style.display = 'none';
+                            }
+                        });
+                    });
+                ]]>
+                </script>
+            </header>
+        </xpath>
+    </template>
+</odoo>

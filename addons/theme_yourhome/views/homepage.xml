@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="custom_homepage" inherit_id="website.homepage" name="Home">
+        <xpath expr="//t[@t-call='website.layout']" position="replace">
+            <t t-call="website.layout">
+                <t t-set="pageName" t-value="'homepage'"/>
+                <div class="oe_structure"/>
+                <div id="wrap">
+
+                    <!-- Structure block before Hero -->
+                    <div class="oe_structure"/>
+
+                    <t t-call="theme_yourhome.food_hero_section"/>
+
+                    <!-- Structure block between Hero and Categories -->
+                    <div class="oe_structure"/>
+
+                    <t t-call="theme_yourhome.popular_categories_section"/>
+
+                    <!-- Structure block between Categories and Tabs -->
+                    <div class="oe_structure"/>
+
+                    <t t-call="theme_yourhome.s_product_tabs"/>
+
+            
+
+                    <!-- Structure block between About and Product Grid -->
+                    <div class="oe_structure"/>
+
+                    <t t-call="theme_yourhome.s_product_grid"/>
+
+                    <!-- Structure block after all sections -->
+                    <div class="oe_structure"/>
+
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>

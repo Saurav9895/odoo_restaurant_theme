@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="s_product_tabs" name="Product Tabs">
+        <section class="tabs-section s_product_tabs pt32 pb32">
+            <p class="tagline">CUSTOMER FAVORITES</p>
+            <h2 class="section-title">Our Menu</h2>
+
+            <!-- Tabs -->
+            <div class="tab-buttons">
+                <t t-set="categories" t-value="request.env['product.public.category'].search([], limit=4)"/>
+                <t t-foreach="categories" t-as="category">
+                    <button t-att-class="'tab-button ' + ('active' if category_index == 0 else '')" 
+                            t-att-data-category-id="'cat-%d' % category.id">
+                        <t t-esc="category.name"/>
+                    </button>
+                </t>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-contents">
+                <t t-foreach="categories" t-as="category">
+                    <div t-att-id="'cat-%d' % category.id" 
+                         t-att-class="'tab-content ' + ('active' if category_index == 0 else '')">
+                        <div class="product-grid">
+                        <t t-set="products" t-value="request.env['product.template'].search([('public_categ_ids', 'in', category.id), ('website_published', '=', True)], limit=8)"/>
+                            <t t-foreach="products" t-as="product">
+                                <a t-att-href="'/shop/product/%s' % product.id" class="dish-card">
+                                    <t t-if="product.image_1920">
+                                        <img t-att-src="image_data_uri(product.image_1920)" 
+                                             t-att-alt="product.name" 
+                                             class="dish-img"/>
+                                    </t>
+                                    <div class="card-content">
+                                        <h3 t-field="product.name"/>
+                                        <span class="price" t-field="product.list_price" 
+                                              t-options='{"widget": "monetary", "display_currency": request.env["website"].get_current_website()._get_current_pricelist().currency_id}'/>
+                                    </div>
+                                </a>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </div>
+
+            <style type="text/css">
+                <![CDATA[
+                    .tabs-section {
+                        font-family: "Inter", sans-serif;
+                        max-width: 1200px;
+                        margin: auto;
+                    }
+                    .tagline {
+                        color: var(--primary);
+                        font-size: 14px;
+                        font-weight: 600;
+                        letter-spacing: 1.5px;
+                        text-transform: uppercase;
+                        margin-bottom: 10px;
+                        text-align: center;
+                    }
+                    .section-title{
+                    font-size: 42px;
+                    font-weight: 700;
+                    margin-bottom: 60px;
+                    text-align: center;
+                    }
+                    .tab-buttons {
+                            display: grid;
+                            grid-template-columns: repeat(4, 1fr);
+                            gap: 20px;
+                            max-width: 800px;
+                            margin: 0 auto 30px;
+                            padding: 0 20px;
+                        }
+
+                    .tab-button {
+                        padding: 10px 24px;
+                        border: 1px solid var(--primary);
+                        border-radius: 8px;
+                        background: transparent;
+                        color: var(--primary);
+                        cursor: pointer;
+                        font-weight: 600;
+                        transition: all 0.3s ease;
+                        font-size: 18px;
+
+                    }
+                    .tab-button.active, .tab-button:hover {
+                        background-color: var(--primary);
+                        color: white;
+                    }
+                    .tab-content {
+                        display: none;
+                    }
+                    .tab-content.active {
+                        display: block;
+                    }
+                    .product-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                        gap: 25px;
+                        padding: 20px;
+                        
+                    }
+                    .dish-card {
+                        background: #fff;
+                        padding: 15px;
+                        text-decoration: none;
+                        color: inherit;
+                    }
+                    .dish-card:hover {
+                        text-decoration: none;
+                    }
+                    .dish-img {
+                        width: 180px;
+                        height: 180px;
+                        object-fit: cover;
+                        border-radius: 50%;
+                        margin: 0 auto 15px;
+                        display: block;
+                        border: 4px solid #f5f5f5;
+                    }
+                    .card-content {
+                        text-align: center;
+                    }
+                    .dish-card h3 {
+                        font-size: 18px;
+                        margin: 0 0 10px;
+                        font-weight: 600;
+                       
+                    }
+                    .price {
+                        color: var(--primary);
+                        font-weight: 600;
+                        font-size: 16px;
+                        text-decoration: none;
+                    }
+                    @media (max-width: 768px) {
+                        .tab-buttons {
+                            gap: 10px;
+                        }
+                        .tab-button {
+                            padding: 8px 16px;
+                            font-size: 14px;
+                        }
+                        .product-grid {
+                            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                            gap: 15px;
+                        }
+                        .dish-img {
+                            height: 150px;
+                        }
+                          .tab-buttons {
+                            grid-template-columns: repeat(2, 1fr);
+                            gap: 10px;
+                            padding: 0 15px;
+                            }
+                    }
+                ]]>
+            </style>
+
+            <script type="text/javascript">
+                <![CDATA[
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const tabButtons = document.querySelectorAll(".tab-button");
+                        const tabContents = document.querySelectorAll(".tab-content");
+
+                        tabButtons.forEach(button => {
+                            button.addEventListener("click", () => {
+                                const target = button.getAttribute("data-category-id");
+
+                                tabButtons.forEach(btn => btn.classList.remove("active"));
+                                tabContents.forEach(content => content.classList.remove("active"));
+
+                                button.classList.add("active");
+                                document.getElementById(target).classList.add("active");
+                            });
+                        });
+                    });
+                ]]>
+            </script>
+        </section>
+    </template>
+</odoo>
