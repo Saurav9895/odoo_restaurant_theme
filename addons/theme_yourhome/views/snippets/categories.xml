@@ -8,7 +8,7 @@
                 <!-- First 3 categories -->
         <t t-set="categories" t-value="request.env['product.public.category'].search([], limit=3, order='create_date desc')" />
                 <t t-foreach="categories" t-as="category">
-                    <div class="category-card" t-attf-onclick="window.location.href='/shop/category/#{category.id}'">
+<div class="category-card" t-attf-onclick="window.location.href='/products/category/#{category.id}'">
                         <div class="image-circle">
                             <img t-if="category.image_1920"
                                  t-att-src="image_data_uri(category.image_1920)"
@@ -22,7 +22,7 @@
                 </t>
 
                 <!-- View All Card -->
-                <div class="category-card" onclick="window.location.href='/shop'">
+                <div class="category-card" onclick="window.location.href='/products'">
                     <div class="image-circle">
                         <i class="fa fa-th-large" style="font-size: 35px; color: white;"></i>
                     </div>

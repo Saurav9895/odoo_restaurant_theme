@@ -15,6 +15,8 @@
         'views/order_page.xml',
         'views/order_detail.xml',
         'views/products_page.xml',
+        'views/category-product.xml',
+        'views/my-account.xml',
         'views/snippets/property-agents.xml',
         'views/snippets/new-properties.xml',
         'views/snippets/product-snippets.xml',

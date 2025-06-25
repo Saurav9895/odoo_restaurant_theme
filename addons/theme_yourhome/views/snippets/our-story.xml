@@ -3,8 +3,8 @@
   <template id="story_section" name="Story Section">
     <section class="section">
       <div class="content">
-        <p class="tagline">Our Story &amp; Heritage</p>
-        <h2 class="story-title">Our Culinary Journey<br />And Services</h2>
+        <p class="tagline our-story-tag">Our Story &amp; Heritage</p>
+        <h2 class="story-title our-story-tag">Our Culinary Journey<br />And Services</h2>
 
         <div class="story-content">
           <p class="description">
@@ -125,6 +125,9 @@
             font-weight: 700;
             margin-bottom: 20px;
             text-align: center;
+          }
+          .our-story-tag{
+          text-align: left;
           }
 
           @media (max-width: 400px) {

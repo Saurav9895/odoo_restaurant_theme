@@ -8,7 +8,7 @@
           Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt
         </p>
         <div class="buttons">
-          <a href="/shop">
+          <a href="/products">
         <button class="order-btn">Order Now</button>
       </a>
           <button class="watch-btn" t-attf-onclick="window.open('https://www.youtube.com/', '_blank')">

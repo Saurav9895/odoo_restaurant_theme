@@ -4,16 +4,8 @@
         <xpath expr="//header" position="replace">
             <header>
                 <style>
-                 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&amp;family=Roboto:ital,wght@0,100..900;1,100..900&amp;display=swap");
-      body {
-        font-family: "Open Sans", sans-serif;
-        margin: 0;
-        padding: 0;
-      }
-                    .custom-header {
+              .custom-header {
                         padding: 15px 0;
-                        <!-- background-color: #F9F9FA;
-                        border-bottom: 1px solid #F9F9FA; -->
                     }
                     .custom-header .nav-link {
                         font-weight: 600;
@@ -276,7 +268,7 @@
                                             </a>
                                         </t>
                                         <div class="search-footer text-center py-2" t-if="products">
-                                            <a href="/shop" class="btn btn-link">View All Products</a>
+                                            <a href="/products" class="btn btn-link">View All Products</a>
                                         </div>
                                     </div>
                                 </div>
@@ -286,7 +278,7 @@
                             <t t-set="cart" t-value="request.website.sale_get_order()"/>
                             <span id="cart-products-count" class="badge" t-esc="int(sum(cart.order_line.mapped('product_uom_qty'))) if cart else 0"/>
                         </a>
-                            <a href="/my" class="account-btn ms-2">My Account</a>
+                            <a href="account" class="account-btn ms-2">My Account</a>
                         </div>
                     </div>
                 </nav>

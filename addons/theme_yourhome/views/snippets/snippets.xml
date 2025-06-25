@@ -37,6 +37,7 @@
                 <t t-snippet="theme_yourhome.category_tabs_snippet" t-thumbnail="/theme_yourhome/static/src/img/snippets/rent-mega-menu.svg">
                     <keywords>story, information</keywords>
                 </t>          
+                      
             </snippets>     
         </xpath>
     </template>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="theme_yourhome.my_account_page" model="website.page">
+        <field name="name">Products</field>
+        <field name="type">qweb</field>
+        <field name="url">/products</field>
+        <field name="is_published">True</field>
+        <field name="key">theme_yourhome.my_account_page</field>
+        <field name="arch" type="xml">
+            <t name="My Account" t-name="theme_yourhome.my_account_page">
+                <t t-call="website.layout">
+                    <div class="oe_structure"/>
+                    <div id="wrap">
+                     <main class="container my-5">
+      <h1>My Account</h1>
+      <t t-if="request.env.user._is_public()">
+        <p>Please <a href="/web/login">log in</a> to view your account details.</p>
+      </t>
+      <t t-else="">
+        <div class="account-info mb-4">
+          <p><strong>Name:</strong> <t t-esc="request.env.user.partner_id.name"/></p>
+          <p><strong>Email:</strong> <t t-esc="request.env.user.partner_id.email"/></p>
+        </div>
+
+        <div class="account-links mb-4">
+          <ul class="list-unstyled">
+            <li><a href="/orders">My Orders</a></li>
+            <li><a href="/my/addresses">My Addresses</a></li>
+            <li><a href="/my/profile/edit">Edit Profile</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <a href="/web/logout" class="btn btn-danger">Logout</a>
+        </div>
+      </t>
+    </main>
+                </div> 
+                </t>
+            </t>
+        </field>
+    </record>
+</odoo>
