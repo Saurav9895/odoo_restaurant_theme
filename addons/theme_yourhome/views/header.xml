@@ -234,6 +234,7 @@
                                 <li><a href="/who-we-are" class="nav-link">Who We Are</a></li>
                                 <li><a href="orders" class="nav-link">Orders</a></li>
                                 <li><a href="/contactus" class="nav-link">Contact</a></li>
+                                
                                
                             </ul>
                         </div>
@@ -278,7 +279,7 @@
                             <t t-set="cart" t-value="request.website.sale_get_order()"/>
                             <span id="cart-products-count" class="badge" t-esc="int(sum(cart.order_line.mapped('product_uom_qty'))) if cart else 0"/>
                         </a>
-                            <a href="account" class="account-btn ms-2">My Account</a>
+                            <a href="/account" class="account-btn ms-2">My Account</a>
                         </div>
                     </div>
                 </nav>

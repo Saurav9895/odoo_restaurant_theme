@@ -1,41 +1,196 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="theme_yourhome.my_account_page" model="website.page">
-        <field name="name">Products</field>
+        <field name="name">My Account</field>
         <field name="type">qweb</field>
-        <field name="url">/products</field>
+        <field name="url">/account</field>
         <field name="is_published">True</field>
         <field name="key">theme_yourhome.my_account_page</field>
         <field name="arch" type="xml">
-            <t name="My Account" t-name="theme_yourhome.my_account_page">
+            <t t-name="theme_yourhome.my_account_page">
                 <t t-call="website.layout">
-                    <div class="oe_structure"/>
-                    <div id="wrap">
-                     <main class="container my-5">
-      <h1>My Account</h1>
-      <t t-if="request.env.user._is_public()">
-        <p>Please <a href="/web/login">log in</a> to view your account details.</p>
-      </t>
-      <t t-else="">
-        <div class="account-info mb-4">
-          <p><strong>Name:</strong> <t t-esc="request.env.user.partner_id.name"/></p>
-          <p><strong>Email:</strong> <t t-esc="request.env.user.partner_id.email"/></p>
-        </div>
+                    <t t-set="title">My Account</t>
+                    
+                    <section class="container my-account-page py-5">
+                        <div class="row">
+                            <!-- Sidebar Navigation -->
+                     <aside class="col-md-3 mb-4">
+    <div class="list-group">
+        <a href="/account" class="list-group-item list-group-item-action active">Dashboard</a>
+        <a href="/account/orders" class="list-group-item list-group-item-action">My Orders</a>
+        <a href="/my/payment_method" class="list-group-item list-group-item-action">Payment Method</a>
+        <a href="/my/security" class="list-group-item list-group-item-action">Settings</a>
 
-        <div class="account-links mb-4">
-          <ul class="list-unstyled">
-            <li><a href="/orders">My Orders</a></li>
-            <li><a href="/my/addresses">My Addresses</a></li>
-            <li><a href="/my/profile/edit">Edit Profile</a></li>
-          </ul>
-        </div>
+        <!-- Logout triggers modal -->
+        <button type="button" class="list-group-item list-group-item-action" 
+                style="color: var(--primary);" 
+                data-bs-toggle="modal" data-bs-target="#logoutModal">
+            <i class="fas fa-sign-out-alt me-2"></i>Logout
+        </button>
+    </div>
+</aside>
 
-        <div>
-          <a href="/web/logout" class="btn btn-danger">Logout</a>
+<!-- Logout Confirmation Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow">
+      <div class="modal-header">
+        <h5 class="modal-title" id="logoutModalLabel" style="color: var(--primary);">
+          <i class="fas fa-exclamation-triangle me-2" style="color: var(--primary);"></i>Confirm Logout
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: var(--primary);">
+        Are you sure you want to logout? Your session will be ended.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="/web/session/logout" class="btn btn-link" style="color: var(--primary); text-decoration:none;">
+            <i class="fas fa-sign-out-alt me-1"></i> Logout
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+                            <!-- Main Content -->
+                            <div class="col-md-9">
+                                <h2 class="mb-4">Welcome, <t t-esc="request.env.user.name" /></h2>
+                                <p class="mb-5">Here you can view your orders, update your details, and manage your account.</p>
+
+                                <div id="account-content" class="row g-4">
+                                    <div class="col-12">
+                                        <h3 class="mb-3">Your Contact Details</h3>
+                                    </div>
+
+                                     
+
+                                    <!-- Name -->
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="card h-100 shadow-sm border-0">
+                                            <div class="card-body d-flex align-items-center">
+                                                <i class="fas fa-user fa-2x text-primary me-3"></i>
+                                                <div>
+                                                    <h6 class="card-subtitle mb-1 text-muted">Name</h6>
+                                                    <p class="mb-0 fw-semibold"><t t-esc="request.env.user.partner_id.name or 'N/A'"/></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="card h-100 shadow-sm border-0">
+                                            <div class="card-body d-flex align-items-center">
+                                                <i class="fas fa-envelope fa-2x text-success me-3"></i>
+                                                <div>
+                                                    <h6 class="card-subtitle mb-1 text-muted">Email</h6>
+                                                    <p class="mb-0 fw-semibold"><t t-esc="request.env.user.email or 'N/A'"/></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Phone -->
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="card h-100 shadow-sm border-0">
+                                            <div class="card-body d-flex align-items-center">
+                                                <i class="fas fa-phone fa-2x text-warning me-3"></i>
+                                                <div>
+                                                    <h6 class="card-subtitle mb-1 text-muted">Phone</h6>
+                                                    <p class="mb-0 fw-semibold"><t t-esc="request.env.user.partner_id.phone or 'N/A'"/></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Mobile -->
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="card h-100 shadow-sm border-0">
+                                            <div class="card-body d-flex align-items-center">
+                                                <i class="fas fa-mobile-alt fa-2x text-info me-3"></i>
+                                                <div>
+                                                    <h6 class="card-subtitle mb-1 text-muted">Mobile</h6>
+                                                    <p class="mb-0 fw-semibold"><t t-esc="request.env.user.partner_id.phone or 'N/A'"/></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Address -->
+                              <div class="col-12">
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <h6 class="card-subtitle mb-4 text-muted d-flex align-items-center">
+                <i class="fas fa-map-marker-alt fa-lg text-danger me-2"></i> Addresses
+            </h6>
+
+            <div class="d-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+
+                <!-- Primary Address -->
+                <div class="border rounded p-3 d-flex flex-column justify-content-between">
+                    <div>
+                        <p class="mb-1 fw-semibold"><t t-esc="request.env.user.partner_id.name or 'N/A'" /></p>
+                        <p class="mb-0">
+                            <t t-esc="request.env.user.partner_id.street or ''"/><br/>
+                            <t t-esc="request.env.user.partner_id.street2 or ''"/><br/>
+                            <t t-esc="request.env.user.partner_id.city or ''"/>,
+                            <t t-esc="request.env.user.partner_id.state_id.name if request.env.user.partner_id.state_id else ''"/><br/>
+                            <t t-esc="request.env.user.partner_id.zip or ''"/><br/>
+                            <t t-esc="request.env.user.partner_id.country_id.name if request.env.user.partner_id.country_id else ''"/>
+                        </p>
+                    </div>
+                    <div class="text-end mt-3">
+                        <span class="badge bg-primary mb-2">Primary Address</span>
+                        <a t-attf-href="/shop/address?address_type=billing&amp;partner_id=#{request.env.user.partner_id.id}" class="text-decoration-none text-primary">
+                          <i class="fas fa-edit me-1"></i> Edit
+                      </a>
+                    </div>
+                </div>
+
+                <!-- Additional Addresses -->
+                <t t-set="extra_addresses" t-value="request.env.user.partner_id.child_ids"/>
+                <t t-if="extra_addresses">
+                    <t t-foreach="extra_addresses" t-as="address">
+                        <div class="border rounded p-3 d-flex flex-column justify-content-between">
+                            <div>
+                                <p class="mb-1 fw-semibold"><t t-esc="address.name or 'N/A'" /></p>
+                                <p class="mb-0">
+                                    <t t-esc="address.street or ''"/><br/>
+                                    <t t-esc="address.street2 or ''"/><br/>
+                                    <t t-esc="address.city or ''"/>,
+                                    <t t-esc="address.state_id.name if address.state_id else ''"/><br/>
+                                    <t t-esc="address.zip or ''"/><br/>
+                                    <t t-esc="address.country_id.name if address.country_id else ''"/>
+                                </p>
+                            </div>
+                            <div class="text-end mt-3">
+                                <span class="badge bg-secondary mb-2">Additional Address</span>
+                               <a t-attf-href="/shop/address?address_type=delivery&amp;partner_id=#{address.id}" class="text-decoration-none text-primary">
+                                  <i class="fas fa-edit me-1"></i> Edit
+                              </a>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+
+                <!-- Fallback -->
+                <t t-if="not extra_addresses">
+                    <div class="text-muted">
+                        No additional addresses saved.
+                    </div>
+                </t>
+            </div>
         </div>
-      </t>
-    </main>
-                </div> 
+    </div>
+</div>
+                                      <a href="/my/account" class="btn btn-primary mb-4" style="width: 30%">
+                                          <i class="fas fa-edit me-2"></i>Edit Info
+                                      </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </t>
             </t>
         </field>
