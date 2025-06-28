@@ -7,7 +7,7 @@
         <section class="ecom-page">
           <div class="ecom-container">
             <!-- Sidebar -->
-            <aside class="ecom-sidebar">
+            <!-- <aside class="ecom-sidebar"> -->
               <!-- <t t-set="attributes" t-value="request.env['product.attribute'].search([])" />
               <t t-foreach="attributes" t-as="attr">
                 <div class="ecom-filter-group">
@@ -24,7 +24,7 @@
                 </div>
               </t> -->
 
-              <div class="ecom-filter-group">
+              <!-- <div class="ecom-filter-group">
                 <strong>Price Range</strong>
                 <div class="price-range-fields">
                   <div class="input-group mb-2">
@@ -38,7 +38,7 @@
                   <button class="btn btn-primary w-100" onclick="applyFilters()">Apply</button>
                 </div>
               </div>
-            </aside>
+            </aside> -->
 
             <!-- Main -->
             <main class="ecom-main">
@@ -120,7 +120,7 @@
                 .ecom-container {
                   display: flex;
                   gap: 20px;
-                  max-width: 1200px;
+                  max-width: 1100px;
                   margin: auto;
                   overflow-x: hidden;
                 }
@@ -202,11 +202,12 @@
                   gap: 20px;
                 }
 
-                .ecom-product-card {
+                 .ecom-product-card {
                   background: #fff;
                   border-radius: 10px;
-                  padding: 15px;
-                  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                  padding: 30px;
+                  border-radius: 30px;
+                  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
                   text-decoration: none;
                   color: inherit;
                   transition: all 0.3s;
@@ -318,41 +319,15 @@
     document.getElementById('searchInput').addEventListener('input', filterAndDisplayProducts);
   });
 
-  function getSelectedAttributes() {
-    const selected = {};
-    document.querySelectorAll('.attribute-filter:checked').forEach(input => {
-      const attrId = input.dataset.attributeId;
-      const valId = input.value;
-      if (!selected[attrId]) selected[attrId] = [];
-      selected[attrId].push(valId);
-    });
-    return selected;
-  }
-
   function filterAndDisplayProducts() {
     const searchQuery = document.getElementById('searchInput').value.toLowerCase();
-    const selectedAttributes = getSelectedAttributes();
-    const minPrice = parseFloat(document.getElementById('min-price').value || 0);
-    const maxPrice = parseFloat(document.getElementById('max-price').value || 100000);
     const sortBy = document.querySelector('select').value;
 
     let filtered = allProducts.filter(card => {
       const name = card.dataset.name;
-      const price = parseFloat(card.dataset.price);
-      const productAttr = card.dataset.attributes.split(',');
-
+      
       // Search
       if (!name.includes(searchQuery)) return false;
-
-      // Price filter
-      if (price < minPrice || price > maxPrice) return false;
-
-      // Attribute filter
-      for (const attr in selectedAttributes) {
-        if (!selectedAttributes[attr].some(val => productAttr.includes(val))) {
-          return false;
-        }
-      }
 
       return true;
     });
@@ -408,12 +383,6 @@
     const grid = document.getElementById('productGrid');
     grid.classList.toggle('list-view', viewType === 'list');
   }
-
-  function applyFilters() {
-    currentPage = 1;
-    filterAndDisplayProducts();
-  }
-
 ]]>
 </script>
           </section>

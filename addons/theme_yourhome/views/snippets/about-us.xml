@@ -1,6 +1,6 @@
 <odoo>
   <template id="aboutus_section" name="About Us Section">
-    <section class="aboutus-wrapper">
+    <section class="aboutus-wrapper" id="aboutus">
       <div class="aboutus-content">
         <p class="aboutus-tag">ABOUT US</p>
         <h2 class="aboutus-title">Welcome to our Zetta <br /> Restaurant</h2>
