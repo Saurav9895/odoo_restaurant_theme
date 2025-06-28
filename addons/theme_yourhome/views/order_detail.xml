@@ -10,22 +10,41 @@
                 <p><strong>Total Amount:</strong> <t t-esc="order.amount_total"/> <t t-esc="order.currency_id.symbol"/></p>
             </div>
 
-            <t t-if="order.partner_shipping_id">
-                <div class="mb-4">
-                    <h5>📦 Delivery Address</h5>
-                    <p>
-                        <t t-esc="order.partner_shipping_id.name"/><br/>
-                        <t t-esc="order.partner_shipping_id.street"/><br/>
-                        <t t-if="order.partner_shipping_id.street2">
-                            <t t-esc="order.partner_shipping_id.street2"/><br/>
-                        </t>
-                        <t t-esc="order.partner_shipping_id.city"/>,
-                        <t t-esc="order.partner_shipping_id.state_id.name"/> -
-                        <t t-esc="order.partner_shipping_id.zip"/><br/>
-                        <t t-esc="order.partner_shipping_id.country_id.name"/>
-                    </p>
-                </div>
-            </t>
+            <div class="row mb-4">
+                <t t-if="order.partner_shipping_id">
+                    <div class="col-md-6">
+                        <h5>📦 Delivery Address</h5>
+                        <p>
+                            <t t-esc="order.partner_shipping_id.name"/><br/>
+                            <t t-esc="order.partner_shipping_id.street"/><br/>
+                            <t t-if="order.partner_shipping_id.street2">
+                                <t t-esc="order.partner_shipping_id.street2"/><br/>
+                            </t>
+                            <t t-esc="order.partner_shipping_id.city"/>,
+                            <t t-esc="order.partner_shipping_id.state_id.name"/> -
+                            <t t-esc="order.partner_shipping_id.zip"/><br/>
+                            <t t-esc="order.partner_shipping_id.country_id.name"/>
+                        </p>
+                    </div>
+                </t>
+
+                <t t-if="order.partner_invoice_id">
+                    <div class="col-md-6">
+                        <h5>🧾 Invoice Address</h5>
+                        <p>
+                            <t t-esc="order.partner_invoice_id.name"/><br/>
+                            <t t-esc="order.partner_invoice_id.street"/><br/>
+                            <t t-if="order.partner_invoice_id.street2">
+                                <t t-esc="order.partner_invoice_id.street2"/><br/>
+                            </t>
+                            <t t-esc="order.partner_invoice_id.city"/>,
+                            <t t-esc="order.partner_invoice_id.state_id.name"/> -
+                            <t t-esc="order.partner_invoice_id.zip"/><br/>
+                            <t t-esc="order.partner_invoice_id.country_id.name"/>
+                        </p>
+                    </div>
+                </t>
+            </div>
 
             <h4 class="mt-5 ordered-heading">🛍 Ordered Products</h4>
             <div class="table-responsive">
@@ -71,17 +90,16 @@
                 </table>
             </div>
         </div>
+
         <style>
             .order-details-heading {
                 font-size: 36px;
                 font-weight: 700;
                 color: var(--primary);
-                
                 margin-bottom: 40px;
-           
             }
-            .ordered-heading{
-              color: var(--primary);
+            .ordered-heading {
+                color: var(--primary);
             }
         </style>
     </t>

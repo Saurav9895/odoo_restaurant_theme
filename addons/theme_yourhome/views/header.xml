@@ -275,6 +275,7 @@
                                     </div>
                                 </div>
                             </div>
+                                
                            <a href="/shop/cart" class="cart-icon position-relative">
                             <i class="fa fa-shopping-bag"></i>
                             <t t-set="cart" t-value="request.website.sale_get_order()"/>

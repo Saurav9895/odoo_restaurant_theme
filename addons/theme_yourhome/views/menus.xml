@@ -49,12 +49,12 @@
             <field name="sequence" type="int">18</field>
         </record>
             <!-- Orders  -->
-       <record id="menu_orders" model="website.menu">
+       <!-- <record id="menu_orders" model="website.menu">
             <field name="name">Orders</field>
             <field name="url">/orders</field>
             <field name="parent_id" ref="website.main_menu"/>
             <field name="sequence" type="int">18</field>
-        </record>
+        </record> -->
             <!-- Account  -->
        <record id="menu_account" model="website.menu">
             <field name="name">Account</field>
