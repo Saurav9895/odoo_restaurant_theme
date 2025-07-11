@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: odoo_website_zetta
+    container_name: odoo_website_zetta_restaurant
     depends_on:
       - db
     ports:
@@ -22,7 +22,7 @@ services:
 
   db:
     image: postgres:14
-    container_name: odoo_dbase_zetta
+    container_name: odoo_dbase_zetta_restaurant
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=odoo

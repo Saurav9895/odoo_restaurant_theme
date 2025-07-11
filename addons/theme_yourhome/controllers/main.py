@@ -74,3 +74,13 @@ class ThemeYourHome(http.Controller):
             'user': user,
             'partner': partner,
         })
+    # @http.route('/web/login', type='http', auth='public', website=True)
+    # def custom_login(self, redirect=None, **kw):
+    #     return request.render('custom_auth_pages.custom_login_template', {})
+
+
+    # @http.route('/custom/signup', type='http', auth='public', website=True)
+    # def custom_signup(self, **kw):
+    #     return request.render('custom_auth_pages.custom_signup_template', {})
+ 
+

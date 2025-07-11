@@ -17,6 +17,8 @@
         'views/products_page.xml',
         'views/category-product.xml',
         'views/my-account.xml',
+        'views/custom_login.xml',
+        'views/custom_signup.xml',
         'views/snippets/property-agents.xml',
         'views/snippets/new-properties.xml',
         'views/snippets/product-snippets.xml',
@@ -45,6 +47,7 @@
             'theme_yourhome/static/src/scss/property-agents.scss',
             'theme_yourhome/static/src/js/explore-cities.js',
             'theme_yourhome/static/src/js/explore-cities-options.js',
+            'theme_yourhome/static/src/img/login_banner.jpg'
            
 
         ],
