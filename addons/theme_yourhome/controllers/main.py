@@ -83,4 +83,7 @@ class ThemeYourHome(http.Controller):
     # def custom_signup(self, **kw):
     #     return request.render('custom_auth_pages.custom_signup_template', {})
  
-
+    @http.route('/custom/signup', type='http', auth='public', website=True)
+    def custom_signup(self, **kw):
+        """Render the custom signup page."""
+        return request.render('theme_yourhome.custom_signup_template', {})

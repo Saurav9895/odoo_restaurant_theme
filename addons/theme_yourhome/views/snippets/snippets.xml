@@ -4,7 +4,7 @@
        
         <xpath expr="//t[@id='default_snippets']" position="inside">
             <snippets id="custom_snippet_group" string="New snippets">
-                <t t-snippet="theme_yourhome.property_agents" t-thumbnail="/theme_yourhome/static/src/img/snippets/agents.svg">
+                <!-- <t t-snippet="theme_yourhome.property_agents" t-thumbnail="/theme_yourhome/static/src/img/snippets/agents.svg">
                     <keywords>property, agents</keywords>
                 </t>           
                 <t t-snippet="theme_yourhome.new_properties" t-thumbnail="/theme_yourhome/static/src/img/snippets/properties.svg">
@@ -12,7 +12,7 @@
                 </t>                
                 <t t-snippet="theme_yourhome.benefits" t-thumbnail="/theme_yourhome/static/src/img/snippets/explore-cities.svg">
                     <keywords>property, benefits</keywords>
-                </t>                
+                </t>                 -->
                 <t t-snippet="theme_yourhome.s_product_grid" t-thumbnail="/theme_yourhome/static/src/img/snippets/rent-mega-menu.svg">
                     <keywords>property, benefits</keywords>
                 </t>                
@@ -42,8 +42,7 @@
         </xpath>
     </template>
 
-    <template id="property_agents_options" inherit_id="website.snippet_options" name="Property Agents Options">
-        <!-- Add property-agents options after Box options -->
+    <!-- <template id="property_agents_options" inherit_id="website.snippet_options" name="Property Agents Options">
         <xpath expr="//div[@data-js='Box']" position="after">
             <div data-selector=".property-agents">
                 <we-select string="Image Border">
@@ -60,7 +59,6 @@
             </div>
         </xpath>
 
-        <!-- Add custom Rent Mega Menu option inside mega_menu_template_opt -->
         <xpath expr="//we-select[@data-name='mega_menu_template_opt']" position="inside">
             <t t-set="_label">Rent Menu</t>
             <we-button t-att-data-select-label="_label"
@@ -68,5 +66,5 @@
                        data-img="/theme_yourhome/static/src/img/snippets/rent-mega-menu.svg"
                        t-out="_label"/>
         </xpath>
-    </template>
+    </template> -->
 </odoo> 

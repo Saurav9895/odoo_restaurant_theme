@@ -111,9 +111,9 @@
                         <div class="useful-links">
                             <p class="link-title">Useful Links</p>
                             <div class="nav">
-                                <p><a href="#" class="link-text">About Us</a></p>
-                                <p><a href="#" class="link-text">My Account</a></p>
-                                <p><a href="#" class="link-text">Privacy Policy</a></p>
+                                <p><a href="who-we-are" class="link-text">About Us</a></p>
+                                <p><a href="account" class="link-text">My Account</a></p>
+                                <p><a href="terms" class="link-text">Privacy Policy</a></p>
                             </div>
                         </div>
                         <div class="main-menu">
@@ -121,7 +121,7 @@
                             <div class="nav">
                                 <p><a href="#" class="link-text">Home</a></p>
                                 <p><a href="#" class="link-text">Offers</a></p>
-                                <p><a href="#" class="link-text">Menu</a></p>
+                                <p><a href="products" class="link-text">Menu</a></p>
                             </div>
                         </div>
                         <div class="contact">
