@@ -10,24 +10,24 @@
                     <!-- Structure block before Hero -->
                     <div class="oe_structure"/>
 
-                    <t t-call="theme_yourhome.food_hero_section"/>
+                    <!-- <t t-call="theme_yourhome.food_hero_section"/> -->
 
                     <!-- Structure block between Hero and Categories -->
                     <div class="oe_structure"/>
 
-                    <t t-call="theme_yourhome.popular_categories_section"/>
+                    <!-- <t t-call="theme_yourhome.popular_categories_section"/> -->
 
                     <!-- Structure block between Categories and Tabs -->
                     <div class="oe_structure"/>
 
-                    <t t-call="theme_yourhome.s_product_tabs"/>
+                    <!-- <t t-call="theme_yourhome.s_product_tabs"/> -->
 
             
 
                     <!-- Structure block between About and Product Grid -->
                     <div class="oe_structure"/>
 
-                    <t t-call="theme_yourhome.s_product_grid"/>
+                    <!-- <t t-call="theme_yourhome.s_product_grid"/> -->
 
                     <!-- Structure block after all sections -->
                     <div class="oe_structure"/>

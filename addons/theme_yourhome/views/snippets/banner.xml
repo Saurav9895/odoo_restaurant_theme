@@ -11,10 +11,11 @@
           <a href="/products">
         <button class="order-btn">Order Now</button>
       </a>
-          <button class="watch-btn" t-attf-onclick="window.open('https://www.youtube.com/', '_blank')">
+         <a href="https://www.youtube.com/"> <button class="watch-btn">
             Watch Video
             <div class="play">&#9658;</div>
           </button>
+          </a>
         </div>
       </div>
 
@@ -25,35 +26,30 @@
         <div class="products">
           <t t-set="latest_products" t-value="request.env['product.template'].search([('website_published', '=', True)], order='create_date desc', limit=2)"/>
           <t t-foreach="latest_products" t-as="product">
-            <!-- Replace the existing product card section -->
-<div class="products">
-    <t t-set="latest_products" t-value="request.env['product.template'].search([('website_published', '=', True)], order='create_date desc', limit=2)"/>
-    <t t-foreach="latest_products" t-as="product">
-        <a t-att-href="'/shop/product/%s' % slug(product)" class="product-card">
-            <img t-if="product.image_1920" t-att-src="image_data_uri(product.image_1920)" t-att-alt="product.name" />
-          <div class="product-info">
-    <h4 t-field="product.name"/>
-    <div class="stars">
-        <t t-if="product.rating_count">
-            <t t-set="full_stars" t-value="int(product.rating_avg)"/>
-            <t t-set="half_star" t-value="1 if product.rating_avg - int(product.rating_avg) >= 0.5 else 0"/>
-            <t t-set="empty_stars" t-value="5 - full_stars - half_star"/>
-            <t t-foreach="range(full_stars)" t-as="i">★</t>
-            <t t-if="half_star">☆</t>
-            <t t-foreach="range(empty_stars)" t-as="i">☆</t>
-            <span class="rating-value" t-esc="('%.1f' % product.rating_avg)"/>
-        </t>
-        <t t-if="not product.rating_count">
-            <t t-foreach="range(5)" t-as="i">☆</t>
-        </t>
-    </div>
-    <div class="price">
-        <span t-field="product.list_price" t-options='{"widget": "monetary", "display_currency": request.env["website"].get_current_website()._get_current_pricelist().currency_id}'/>
-    </div>
-</div>
-        </a>
-    </t>
-</div>
+            <a t-att-href="'/shop/product/%s' % slug(product)" class="product-card">
+              <img t-if="product.image_1920" t-att-src="image_data_uri(product.image_1920)" t-att-alt="product.name" />
+              <div class="product-info">
+                <h4 t-field="product.name"/>
+                <div class="stars">
+                  <t t-if="product.rating_count">
+                    <t t-set="full_stars" t-value="int(product.rating_avg)"/>
+                    <t t-set="half_star" t-value="1 if product.rating_avg - int(product.rating_avg) >= 0.5 else 0"/>
+                    <t t-set="empty_stars" t-value="5 - full_stars - half_star"/>
+                    <t t-foreach="range(full_stars)" t-as="i">★</t>
+                    <t t-if="half_star">☆</t>
+                    <t t-foreach="range(empty_stars)" t-as="i">☆</t>
+                    <span class="rating-value" t-esc="('%.1f' % product.rating_avg)"/>
+                  </t>
+                  <t t-if="not product.rating_count">
+                    <t t-foreach="range(5)" t-as="i">☆</t>
+                  </t>
+                </div>
+                <div class="price">
+                  <span t-field="product.list_price"
+                        t-options='{"widget": "monetary", "display_currency": request.env["website"].get_current_website()._get_current_pricelist().currency_id}'/>
+                </div>
+              </div>
+            </a>
           </t>
         </div>
       </div>

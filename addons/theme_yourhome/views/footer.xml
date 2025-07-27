@@ -134,12 +134,20 @@
                         </div>
                     </div>
                     <div class="bottom-footer">
-                        <div class="social-icons">
-                            <a href="#"><i class="facebook fab fa-facebook-f"/></a>
-                            <a href="#"><i class="instagram fab fa-instagram"/></a>
-                            <a href="#"><i class="twitter fab fa-twitter"/></a>
-                            <a href="#"><i class="youtube fab fa-youtube"/></a>
-                        </div>
+                     <div class="social-icons">
+                      <a t-att-href="'https://facebook.com'" data-oe-expression="'https://facebook.com'" data-oe-field="facebook_url" data-oe-model="website.config.settings">
+                          <i class="facebook fab fa-facebook-f"/>
+                      </a>
+                      <a t-att-href="'https://instagram.com'" data-oe-expression="'https://instagram.com'" data-oe-field="instagram_url" data-oe-model="website.config.settings">
+                          <i class="instagram fab fa-instagram"/>
+                      </a>
+                      <a t-att-href="'https://twitter.com'" data-oe-expression="'https://twitter.com'" data-oe-field="twitter_url" data-oe-model="website.config.settings">
+                          <i class="twitter fab fa-twitter"/>
+                      </a>
+                      <a t-att-href="'https://youtube.com'" data-oe-expression="'https://youtube.com'" data-oe-field="youtube_url" data-oe-model="website.config.settings">
+                          <i class="youtube fab fa-youtube"/>
+                      </a>
+                  </div>
                         <div class="copyright-content">
                             <p class="copyright-text">
                                 &amp;copy; 2025 Zetta | All rights reserved.
