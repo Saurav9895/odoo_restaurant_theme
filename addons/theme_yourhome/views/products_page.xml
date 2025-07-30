@@ -183,13 +183,22 @@
                 }
 
                 .ecom-product-img-wrap {
-                  text-align: center;
-                  margin-bottom: 15px;
+                  width: 150px;
+                  height: 150px;
+                  margin: 0 auto 15px;
+                  overflow: hidden;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  border-radius: 5px;
+                  background: #f0f0f0;
                 }
 
                 .ecom-product-img {
-                  height: 150px;
-                  object-fit: contain;
+                   width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  display: block;
                 }
 
                 .ecom-product-info h4 {
